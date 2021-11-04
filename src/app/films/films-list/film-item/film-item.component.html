@@ -1,0 +1,16 @@
+<mat-card  class="card">
+    <mat-card-header class="title-wrapper">
+        <div class="title">
+            <mat-card-title class="child" [routerLink]="['/details', listFilm?.id]">{{listFilm?.title}} </mat-card-title>
+            <mat-icon (click)="toggleFavourite(listFilm?.id, !listFilm?.favourite)" [class.colorStars]="listFilm?.favourite">star</mat-icon>
+        </div>
+        <img
+        mat-card-image [src]="'https://image.tmdb.org/t/p/w500/' + listFilm?.poster_path">
+    </mat-card-header>
+    <mat-card-content class="card-content">
+        <p class="child"> {{listFilm?.overview}}</p>
+        <p class="child"> <span>Release date:</span> {{listFilm?.release_date}}</p>
+        <p class="child"> <span>Rating:</span> {{listFilm?.vote_average}}</p>
+        <p class="child"> <span>Popularity:</span> {{listFilm?.popularity}}</p>
+    </mat-card-content>
+</mat-card>

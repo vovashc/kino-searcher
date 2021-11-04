@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "auth-8741d": {
+      "hosting": {
+        "kino-searcher": [
+          "auth-8741d"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "auth-8741d"
+  }
+}

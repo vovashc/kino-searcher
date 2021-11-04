@@ -1,0 +1,6 @@
+<app-search-movie (newSearchValue)="search($event)"></app-search-movie>
+<div class="list-wrapper"> 
+    <div *ngFor="let film of listArray"  class="film-container">
+        <app-film-item [listFilm]="film" (favouriteId)="switchFavourite($event)"></app-film-item>
+    </div>
+</div> 

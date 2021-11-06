@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { GetFilmsRespose, GetMovieById } from '../interfaces/films-list';
+import { environment } from 'src/environments/environment';
+import { GetFilmsResponse, GetMovieById } from '../interfaces/films-list';
 
 interface Params {
   api_key?: string;
-  lenguage?: string;
+  language?: string;
 }
 
 interface GetListParams extends Params {
@@ -17,66 +18,49 @@ interface SearchMoviesParams extends Params {
   query?: string; 
 }
 
-interface GetIdParams extends Params {
-}
-
-
 @Injectable({
   providedIn: 'root'
 })
 export class FilmsHttpService {
 
-  constructor( private http: HttpClient ) {
-  }
+  constructor( private http: HttpClient ) { }
 
-  getMovie( config: GetListParams = {} ): Observable<GetFilmsRespose> {
-    config['api_key'] = '6e39b915b87d731aec3cace54a1d9ee3';
-    config['lenguage'] = 'en-US';
+  getMovie( config: GetListParams = {} ): Observable<GetFilmsResponse> {
     config['page'] = 1;
-    const qp = Object
-      .entries(config)
-      .reduce(( acc:string[], [k,v] ) => {
-        return [ ...acc, `${k}=${v}` ]
-      }, [])
-      .join('&');
-    return this.http.get<GetFilmsRespose>(`https://api.themoviedb.org/3/trending/all/day?${qp}`);
+    const qp = this.generateQueryParams(config);
+
+    return this.http.get<GetFilmsResponse>(`${environment.apiUrl}/trending/all/day?${qp}`);
   }
 
-  getSearch( config: SearchMoviesParams = {} ): Observable<GetFilmsRespose> {
-    config['api_key'] = '6e39b915b87d731aec3cace54a1d9ee3';
-    config['lenguage'] = 'en-US';
+  getSearch( config: SearchMoviesParams = {} ): Observable<GetFilmsResponse> {
     config['page'] = 1;
-    const qp = Object
-      .entries(config)
-      .reduce(( acc:string[], [k,v] ) => {
-        return [ ...acc, `${k}=${v}` ]
-      }, [])
-      .join('&');
-    return this.http.get<GetFilmsRespose>(`https://api.themoviedb.org/3/search/movie/?${qp}`);
+    const qp = this.generateQueryParams(config);
+
+    return this.http.get<GetFilmsResponse>(`${environment.apiUrl}/search/movie/?${qp}`);
   }
 
-  getMovieId( movie_id: number, config: GetIdParams = {} ): Observable<GetMovieById> {
-    config['api_key'] = '6e39b915b87d731aec3cace54a1d9ee3';
-    config['lenguage'] = 'en-US';
-    const qp = Object
-      .entries(config)
-      .reduce(( acc:string[], [k,v] ) => {
-        return [ ...acc, `${k}=${v}` ]
-      }, [])
-      .join('&');
-    return this.http.get<GetMovieById>(`https://api.themoviedb.org/3/movie/${movie_id}?${qp}`);
+  getMovieId( movie_id: number): Observable<GetMovieById> {
+    const qp = this.generateQueryParams({});
+
+    return this.http.get<GetMovieById>(`${environment.apiUrl}/movie/${movie_id}?${qp}`);
   }
 
 
-  getSimilarMovie(movie_id: number, config: GetIdParams = {}): Observable<GetFilmsRespose>{
+  getSimilarMovie(movie_id: number): Observable<GetFilmsResponse>{
+    const qp = this.generateQueryParams({});
+
+    return this.http.get<GetFilmsResponse>(`${environment.apiUrl}/movie/${movie_id}/similar?${qp}`);
+  }
+
+  private generateQueryParams(config: Params): string {
     config['api_key'] = '6e39b915b87d731aec3cace54a1d9ee3';
-    config['lenguage'] = 'en-US';
-    const qp = Object
+    config['language'] = 'en-US';
+
+    return Object
       .entries(config)
       .reduce(( acc:string[], [k,v] ) => {
         return [ ...acc, `${k}=${v}` ]
       }, [])
       .join('&');
-    return this.http.get<GetFilmsRespose>(`https://api.themoviedb.org/3/movie/${movie_id}/similar?${qp}`);
   }
 }

@@ -8,25 +8,27 @@
                 [src]="'https://image.tmdb.org/t/p/w500/' + data?.poster_path">   
             <p class="plot">{{data?.overview}}</p>
         </div>
-        <div class="details">
-            <p><span class="label">Runtime:</span> {{data?.runtime}}</p>
-            <p><span class="label">Genre:</span> 
-                <span *ngFor="let genre of data?.genres">{{genre.name}}, </span>
-            </p>
-            <p><span class="label">Language:</span> {{data?.original_language}}</p>
-            <p><span class="label">Country:</span> 
-                <span *ngFor="let country of data?.production_countries">{{country.name}}, </span>
-            </p>
-            <p><span class="label">Production:</span> 
-                <span *ngFor="let company of data?.production_companies">{{company.name}}, </span>
-            </p>
-            <p><span class="label">Website:</span> {{data?.homepage}}</p>
-        </div>
-    </div>
-
-    <div class="film-container" >
-        <div *ngFor="let film of currentItem" class="corau">
-            <app-similar-films [item]="film"> </app-similar-films>
+        <div class="details-wrapper">
+            <div class="details">
+                <p><span class="label">Runtime:</span> {{data?.runtime}}</p>
+                <p><span class="label">Genre:</span> 
+                    <span *ngFor="let genre of data?.genres">{{genre.name}}, </span>
+                </p>
+                <p><span class="label">Language:</span> {{data?.original_language}}</p>
+                <p><span class="label">Country:</span> 
+                    <span *ngFor="let country of data?.production_countries">{{country.name}}, </span>
+                </p>
+                <p><span class="label">Production:</span> 
+                    <span *ngFor="let company of data?.production_companies">{{company.name}}, </span>
+                </p>
+                <p><span class="label">Website:</span> {{data?.homepage}}</p>
+            </div>
+            <h2>Similar films: </h2>
+            <div class="film-container">
+                <div *ngFor="let film of currentItem" class="similar-films">
+                    <app-similar-films [item]="film"> </app-similar-films>
+                </div>
+            </div>
         </div>
     </div>
 </div>

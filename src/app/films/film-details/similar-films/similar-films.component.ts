@@ -8,14 +8,9 @@ import { Film } from '../../interfaces/films-list';
   styleUrls: ['./similar-films.component.scss']
 })
 export class SimilarFilmsComponent implements OnInit {
-  @Input() item: Film | undefined
-  constructor(private route: ActivatedRoute) { }
-  
-  
-  ngOnInit(): void {
-    
-  }
+  @Input() item: Film | undefined;
 
+  constructor() { }
 
-
+  ngOnInit(): void {}
 }

@@ -22,22 +22,14 @@ export class AuthService {
 
   login(email: string, password: string) {
     this.afAuth.signInWithEmailAndPassword(email, password)
-      .then(value => {
-        this.successLoginSignup(value);
-      })
-      .catch(err => {
-        this._snackBar.open(err.message);
-      });
+      .then((value) => (this.successLoginSignup(value)))
+      .catch(err => (this._snackBar.open(err.message)));
   }
 
   emailSignup(email: string, password: string) {
     this.afAuth.createUserWithEmailAndPassword(email, password)
-    .then(value => {
-      this.successLoginSignup(value);
-    })
-    .catch(error => {
-      this._snackBar.open(error.message);
-    });
+    .then(value => (this.successLoginSignup(value)))
+    .catch(error => (this._snackBar.open(error.message)));
   }
 
   logout() {

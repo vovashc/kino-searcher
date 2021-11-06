@@ -6,12 +6,14 @@ import { LoginComponent } from './login/login.component';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 @NgModule({
   declarations: [
     AuthComponent, LoginComponent
   ],
   imports: [
     CommonModule,
+    MatCardModule,
     AuthRoutingModule,
     MatInputModule,
     ReactiveFormsModule,

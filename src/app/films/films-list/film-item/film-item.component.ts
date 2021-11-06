@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Film } from '../../interfaces/films-list';
+import { FavoriteId, Film } from '../../interfaces/films-list';
 
 @Component({
   selector: 'app-film-item',
@@ -7,39 +7,40 @@ import { Film } from '../../interfaces/films-list';
   styleUrls: ['./film-item.component.scss']
 })
 export class FilmItemComponent implements OnInit {
-  @Input() listFilm: Film | undefined; 
-  @Output() favouriteId = new EventEmitter<{id: number, isFavourite: boolean}>();
+  @Input() film: Film | undefined; 
+  @Output() favoriteId = new EventEmitter<FavoriteId>();
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  toggleFavourite(filmId: any, isFavourite: any): void {
-    this.favouriteId.emit({id: filmId, isFavourite });
-    if(isFavourite) {
-      this.setFavourite(filmId)
+  toggleFavorite(filmId: number, isFavorite: boolean): void {
+    this.favoriteId.emit({id: filmId, isFavorite });
+    if(isFavorite) {
+      this.setFavorite(filmId);
     } else {
-      this.deleteFavourite(filmId)
+      this.deleteFavorite(filmId);
     }
   }
 
-  private setFavourite(filmId: number): void {
-    let favouriteFilms = [];
-    if(localStorage.getItem('favouriteFilms')) {
-      const localFilimsIds = JSON.parse(localStorage.getItem('favouriteFilms') as string);
-      favouriteFilms = [...localFilimsIds, filmId];
+  private setFavorite(filmId: number): void {
+    let favoriteFilms = [];
+    if(localStorage.getItem('favoriteFilms')) {
+      const localFilmsIds = JSON.parse(localStorage.getItem('favoriteFilms') as string);
+      favoriteFilms = [...localFilmsIds, filmId];
     } else {
-      favouriteFilms = [filmId];
+      favoriteFilms = [filmId];
      }
-    localStorage.setItem('favouriteFilms', JSON.stringify(favouriteFilms));
+    localStorage.setItem('favoriteFilms', JSON.stringify(favoriteFilms));
   }
 
     
-  private deleteFavourite(filmId: number): void {
-    if(localStorage.getItem('favouriteFilms')) {
-      const localFilimsIds = JSON.parse(localStorage.getItem('favouriteFilms') as string);
-      const favouriteFilms = localFilimsIds.filter((item: number) => item !== filmId);
-      localStorage.setItem('favouriteFilms', JSON.stringify(favouriteFilms));
+  private deleteFavorite(filmId: number): void {
+    if(localStorage.getItem('favoriteFilms')) {
+      const localFilmsIds = JSON.parse(localStorage.getItem('favoriteFilms') as string);
+      const favoriteFilms = localFilmsIds.filter((item: number) => item !== filmId);
+      localStorage.setItem('favoriteFilms', JSON.stringify(favoriteFilms));
     } 
   }
 }

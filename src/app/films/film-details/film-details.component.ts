@@ -1,9 +1,9 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, Params, Router,} from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { FilmsHttpService } from '../services/films-http.service';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { Film, GetMovieById } from '../interfaces/films-list';
-import { combineLatest, Subject,} from 'rxjs';
+import { combineLatest, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-film-details',
@@ -32,7 +32,6 @@ export class FilmDetailsComponent implements OnInit, OnDestroy {
         ),  
       )
       .subscribe(([byId, similarMovies]) =>{
-        console.log(byId, similarMovies)
         this.data = byId;
         this.currentItem = similarMovies.results;
       })
@@ -41,6 +40,5 @@ export class FilmDetailsComponent implements OnInit, OnDestroy {
     ngOnDestroy() { 
       this.notifier.next()
       this.notifier.complete()
-      console.log(this.ngOnDestroy)
   } 
 }

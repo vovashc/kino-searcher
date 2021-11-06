@@ -1,18 +1,13 @@
-.list-wrapper{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 20px;
-    background-color: gray;
-    .film-container {
-        width: calc(33% - 10px);
+.list-wrapper {
+    padding: 20px 60px;
+    background-color: rgba($color: lightblue, $alpha: 0.4);
+    .list-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 20px;
+        .film-container {
+            width: calc(33% - 10px);
+        }
     }
-
-
-}
-.top{
-    height: 30px;
-    padding: 10px 515px;
-    display: flex;
-    grid-gap: 30px;
 }

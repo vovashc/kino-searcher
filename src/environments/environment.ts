@@ -11,6 +11,7 @@ export const environment = {
     authDomain: 'auth-8741d.firebaseapp.com',
     messagingSenderId: '680295355690',
   },
+  apiUrl: 'https://api.themoviedb.org/3',
   production: false
 };
 

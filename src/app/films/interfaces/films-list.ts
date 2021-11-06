@@ -1,4 +1,4 @@
-export interface GetFilmsRespose {
+export interface GetFilmsResponse {
     timestamp: number;
     timespam: boolean;
     page: number
@@ -23,7 +23,7 @@ export interface Film {
     vote_average: number;
     vote_count: number;
     adult: boolean;
-    favourite: boolean;
+    favorite: boolean;
 }
 
 export interface GetMovieById {
@@ -43,11 +43,12 @@ export interface GetMovieById {
     overview: string;
     popularity: number;
     poster_path: string;
+    
     production_companies: {
-        id: 174
-        logo_path: "/IuAlhI9eVC9Z8UQWOIDdWRKSEJ.png"
-        name: "Warner Bros. Pictures"
-        origin_country: "US"
+        id: number;
+        logo_path: string;
+        name: string;
+        origin_country: string;
     }[]
     production_countries: {
         iso_3166_1: number;
@@ -67,4 +68,9 @@ export interface GetMovieById {
     video: false
     vote_average: number;
     vote_count: number;
+}
+
+export interface FavoriteId {
+  id: number;
+  isFavorite: boolean;
 }

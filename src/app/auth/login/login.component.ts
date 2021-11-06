@@ -35,5 +35,4 @@ export class LoginComponent implements OnInit {
   navigateSignUp(): void {
     this.router.navigate([this.isLogin ? 'auth/sign-up' : 'auth/login']);
   }
-
 }
